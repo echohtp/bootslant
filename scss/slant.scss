@@ -1,0 +1,140 @@
+/*==========  Variables  ==========*/
+
+$pg-bg:             #dcdcdc;
+$rr-bg:             #232E39;
+$rr-bg-hover:       darken($rr-bg, 10%);
+
+$rr-height:         100px;
+$rr-slant:          100px;
+$rr-gutter:         1%;
+$rr-width:          50%;
+
+
+/*==========  Styles  ==========*/
+
+// Scaffolding
+body {
+    background-color: $pg-bg;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 300;
+}
+h3 { text-transform: uppercase; }
+$class-slug: rr-fwd;
+@for $i from 1 through 12{
+    .#{$class-slug}-#{$i} > div { text-align: center; overflow: auto; }
+
+    // Construct the rectangles
+    .#{$class-slug}-#{$i} {
+        color: lighten($rr-bg, 40%);
+        position: relative;
+        height: $rr-height;
+        background: $rr-bg;
+        &.#{$class-slug}-#{$i}-left {
+            z-index: 1;
+            float: left;
+            width: (($i / 12) * 100) + 5%; // + 5% adjustment for slant offset
+        }
+        &.#{$class-slug}-#{$i}-right {
+            z-index: 2;
+            float: right;
+            width: (($i / 12) * 100) - 6%; // - 5% adjustment for slant offset
+        }
+    }
+
+
+
+    // Add slanted edges
+    .#{$class-slug}-#{$i}:before,
+    .#{$class-slug}-#{$i}:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 0;
+    }
+    .#{$class-slug}-#{$i}-left:after {
+        right: 0;
+        border-left: 100px solid $rr-bg;
+        border-bottom: 100px solid $pg-bg;
+    }
+    .#{$class-slug}-#{$i}-right:before {
+        left: -$rr-slant;
+        border-right: $rr-slant solid $rr-bg;
+        border-top: $rr-height solid rgba(0, 0, 0, 0); // overlaps .rr-left
+    }
+
+    // Add padding around inner content
+    .#{$class-slug}-#{$i}-left > div {
+        margin-right: $rr-slant;
+        margin-left: $rr-slant/2;
+    }
+    .#{$class-slug}-#{$i}-right > div {
+        margin-right: $rr-slant/2;
+        margin-left: $rr-slant/4;
+    }
+
+    // Hover styles
+    .#{$class-slug}-#{$i}:hover { background: $rr-bg-hover; }
+    .#{$class-slug}-#{$i}-left:hover:after { border-left-color: $rr-bg-hover; }
+    .#{$class-slug}-#{$i}-right:hover:before { border-right-color: $rr-bg-hover; }
+}
+
+$class-s: rr-back;
+@for $i from 1 through 12{
+    .#{$class-s}-#{$i} > div { text-align: center; overflow: hidden; }
+
+    // Construct the rectangles
+    .#{$class-s}-#{$i} {
+        color: lighten($rr-bg, 40%);
+        position: relative;
+        height: $rr-height;
+        background: $rr-bg;
+        &.#{$class-s}-#{$i}-left {
+            z-index: 1;
+            float: left;
+            width: (($i / 12) * 100) + 5%; // + 5% adjustment for slant offset
+        }
+        &.#{$class-s}-#{$i}-right {
+            z-index: 2;
+            float: right;
+            width: (($i / 12) * 100) - 6%; // - 5% adjustment for slant offset
+        }
+    }
+
+
+
+    // Add slanted edges
+    .#{$class-s}-#{$i}:before,
+    .#{$class-s}-#{$i}:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 0;
+    }
+    .#{$class-s}-#{$i}-left:after {
+        right: 0;
+        border-left: 100px solid $rr-bg;
+        border-top: 100px solid $pg-bg;
+    }
+    .#{$class-s}-#{$i}-right:before {
+        left: -$rr-slant;
+        border-right: $rr-slant solid $rr-bg;
+        border-bottom: $rr-height solid rgba(0, 0, 0, 0); // overlaps .rr-left
+    }
+
+    // Add padding around inner content
+    .#{$class-s}-#{$i}-left > div {
+        margin-right: $rr-slant;
+        margin-left: $rr-slant/2;
+    }
+    .#{$class-s}-#{$i}-right > div {
+        margin-right: $rr-slant/2;
+        margin-left: $rr-slant/4;
+    }
+
+    // Hover styles
+    .#{$class-s}-#{$i}:hover { background: $rr-bg-hover; }
+    .#{$class-s}-#{$i}-left:hover:after { border-left-color: $rr-bg-hover; }
+    .#{$class-s}-#{$i}-right:hover:before { border-right-color: $rr-bg-hover; }
+}
